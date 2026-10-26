@@ -1,23 +1,15 @@
-import { pathExists } from "../scanner.js"
-import { createFinding } from "../finding.js"
+import { createFinding } from "../finding.js";
 
-// check whether the projec hads a package.json file
+// Check whether package.json exists and contains valid JSON.
+export async function checkPackageJson(context) {
+  const valid = !context.packageJsonError;
 
-export async function checkPackageJson(projectPath){
-    const packagePath = `${projectPath}/package.json`
-
-    if (await pathExists(packagePath)){
-        return createFinding(
-            "package-json",
-            "package.json",
-            "pass",
-            "package.json exists"
-        )
-    }
-    return createFinding(
-        "package-json",
-        "package.json",
-        "fail",
-        'package.json is missing'
-    )
+  return createFinding(
+    "package-json",
+    "package.json",
+    valid ? "pass" : "fail",
+    valid
+      ? "package.json exists and is valid"
+      : "package.json is missing or invalid"
+  );
 }

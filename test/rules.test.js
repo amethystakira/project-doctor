@@ -6,6 +6,10 @@ import { checkDescription } from "../src/rules/description.js";
 import { checkTestScript } from "../src/rules/test-script.js";
 import { checkRepository } from "../src/rules/repository.js";
 import { checkNodeVersion } from "../src/rules/node-version.js";
+import { checkReadme } from "../src/rules/readme.js";
+import { checkGitignore } from "../src/rules/gitignore.js";
+import { checkLicense } from "../src/rules/license.js";
+import { checkPackageJson } from "../src/rules/package-json.js";
 
 // Test a missing package name.
 test("package name is missing", async () => {
@@ -80,4 +84,60 @@ test("Node.js version requirement is missing", async () => {
   const result = await checkNodeVersion(context);
 
   assert.equal(result.status, "warn");
+});
+
+// Test a missing README.
+test("README is missing", async () => {
+  const context = { projectPath: "/tmp/project-doctor-empty" };
+  const result = await checkReadme(context);
+
+  assert.equal(result.status, "warn");
+});
+
+// Test a missing .gitignore.
+test(".gitignore is missing", async () => {
+  const context = { projectPath: "/tmp/project-doctor-empty" };
+  const result = await checkGitignore(context);
+
+  assert.equal(result.status, "warn");
+});
+
+// Test a missing LICENSE.
+test("LICENSE is missing", async () => {
+  const context = { projectPath: "/tmp/project-doctor-empty" };
+  const result = await checkLicense(context);
+
+  assert.equal(result.status, "warn");
+});
+
+// Test a missing package.json.
+test("package.json is missing", async () => {
+  const context = {
+    packageJson: null,
+    packageJsonError: new Error("File not found")
+  };
+
+  const result = await checkPackageJson(context);
+
+  assert.equal(result.status, "fail");
+  assert.equal(
+    result.message,
+    "package.json is missing or invalid"
+  );
+});
+
+// Test malformed package.json.
+test("package.json is invalid", async () => {
+  const context = {
+    packageJson: null,
+    packageJsonError: new SyntaxError("Invalid JSON")
+  };
+
+  const result = await checkPackageJson(context);
+
+  assert.equal(result.status, "fail");
+  assert.equal(
+    result.message,
+    "package.json is missing or invalid"
+  );
 });
