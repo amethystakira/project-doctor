@@ -67,3 +67,29 @@ test("reports malformed package.json without crashing", async () => {
     await fs.rm(tempDir, { recursive: true, force: true });
   }
 });
+
+test("reports package.json containing null without crashing", async () => {
+  const tempDir = await fs.mkdtemp(
+    path.join(os.tmpdir(), "project-doctor-")
+  );
+
+  try {
+    await fs.writeFile(
+      path.join(tempDir, "package.json"),
+      "null"
+    );
+
+    const report = await inspectProject(tempDir);
+
+    assert.equal(report.findings.length, 10);
+    assert.ok(
+      report.findings.some(
+        (finding) =>
+          finding.id === "package-json" &&
+          finding.status === "fail"
+      )
+    );
+  } finally {
+    await fs.rm(tempDir, { recursive: true, force: true });
+  }
+});
