@@ -1,11 +1,12 @@
+
 import path from "node:path";
 import { pathExists } from "../scanner.js";
 import { createFinding } from "../finding.js";
 
 // Check whether .gitignore exists.
-export async function checkGitignore(projectPath) {
+export async function checkGitignore(context) {
   const exists = await pathExists(
-    path.join(projectPath, ".gitignore")
+    path.join(context.projectPath, ".gitignore")
   );
 
   return createFinding(

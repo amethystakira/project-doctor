@@ -1,11 +1,12 @@
+
 import path from "node:path";
 import { pathExists } from "../scanner.js";
 import { createFinding } from "../finding.js";
 
 // Check whether LICENSE exists.
-export async function checkLicense(projectPath) {
+export async function checkLicense(context) {
   const exists = await pathExists(
-    path.join(projectPath, "LICENSE")
+    path.join(context.projectPath, "LICENSE")
   );
 
   return createFinding(
