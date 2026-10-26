@@ -1,18 +1,13 @@
 
-import { createFinding } from "../finding.js";
+import { createFinding, createSkippedFinding } from "../finding.js";
 
 // Check whether package.json has a name.
 export async function checkPackageName(context) {
   const { packageJson, packageJsonError } = context;
 
-  if (packageJsonError) {
-    return createFinding(
-      "package-name",
-      "package name",
-      "fail",
-      "Could not read package.json"
-    );
-  }
+  if (context.packageJsonError) {
+  return createSkippedFinding("package-name", "package name");
+}
 
   if (packageJson.name) {
     return createFinding(

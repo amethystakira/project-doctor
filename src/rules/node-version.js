@@ -1,15 +1,10 @@
 
-import { createFinding } from "../finding.js";
+import { createFinding, createSkippedFinding } from "../finding.js";
 
 // Check whether a Node.js version requirement is configured.
 export async function checkNodeVersion(context) {
   if (context.packageJsonError) {
-    return createFinding(
-      "node-version",
-      "Node.js version",
-      "fail",
-      "Could not read package.json"
-    );
+    return createSkippedFinding("node-version", "Node.js version");
   }
 
   const nodeVersion = context.packageJson.engines?.node?.trim();

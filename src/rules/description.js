@@ -1,15 +1,10 @@
 
-import { createFinding } from "../finding.js";
+import { createFinding, createSkippedFinding } from "../finding.js";
 
 // Check whether package.json has a description.
 export async function checkDescription(context) {
   if (context.packageJsonError) {
-    return createFinding(
-      "description",
-      "description",
-      "fail",
-      "Could not read package.json"
-    );
+    return createSkippedFinding("description", "description");
   }
 
   if (context.packageJson.description) {

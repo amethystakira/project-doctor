@@ -1,15 +1,10 @@
 
-import { createFinding } from "../finding.js";
+import { createFinding, createSkippedFinding } from "../finding.js";
 
 // Check whether repository metadata is configured.
 export async function checkRepository(context) {
   if (context.packageJsonError) {
-    return createFinding(
-      "repository",
-      "repository",
-      "fail",
-      "Could not read package.json"
-    );
+    return createSkippedFinding("repository", "repository");
   }
 
   const repository = context.packageJson.repository;

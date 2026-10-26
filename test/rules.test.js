@@ -10,6 +10,7 @@ import { checkReadme } from "../src/rules/readme.js";
 import { checkGitignore } from "../src/rules/gitignore.js";
 import { checkLicense } from "../src/rules/license.js";
 import { checkPackageJson } from "../src/rules/package-json.js";
+import { createSkippedFinding } from "../src/finding.js";
 
 // Test a missing package name.
 test("package name is missing", async () => {
@@ -140,4 +141,20 @@ test("package.json is invalid", async () => {
     result.message,
     "package.json is missing or invalid"
   );
+});
+
+// Test that skipped checks produce warnings.
+test("skipped finding uses warning status", () => {
+  const result = createSkippedFinding("package-name", "package name");
+
+  assert.equal(result.status, "warn");
+  assert.match(result.message, /skipped/i);
+});
+
+// Test that skipped findings preserve their identifiers.
+test("skipped finding preserves check details", () => {
+  const result = createSkippedFinding("repository", "repository");
+
+  assert.equal(result.id, "repository");
+  assert.equal(result.name, "repository");
 });
