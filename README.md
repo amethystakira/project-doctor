@@ -1,4 +1,4 @@
-# Project Doctor
+# ProjectMedic
 
 A Node.js project health checker that identifies missing or misconfigured project metadata and files.
 
@@ -39,7 +39,7 @@ node bin/doctor.js . --json
 ## Library API
 
 ```js
-import { inspectProject } from "project-doctor";
+import { inspectProject } from "projectmedic";
 
 const report = await inspectProject("./my-project");
 
