@@ -1,6 +1,6 @@
 {
   "name": "projectmedic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Node.js project health checker that identifies missing or misconfigured project metadata and files.",
   "license": "ISC",
   "author": "",
