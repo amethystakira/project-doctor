@@ -15,7 +15,7 @@ try {
   if (jsonMode) {
     console.log(JSON.stringify(report, null, 2));
   } else {
-    console.log("\nProject Doctor\n");
+    console.log("\nProjectMedic\n");
 
     for (const finding of report.findings) {
       const symbol =
@@ -39,7 +39,7 @@ try {
   if (jsonMode) {
     console.log(JSON.stringify({ error: error.message }, null, 2));
   } else {
-    console.error(`Project Doctor: ${error.message}`);
+    console.error(`ProjectMedic: ${error.message}`);
   }
 
   process.exitCode = 1;

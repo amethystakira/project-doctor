@@ -21,7 +21,7 @@ test("CLI prints a human-readable report", () => {
   );
 
   assert.equal(result.status, 0);
-  assert.match(result.stdout, /Project Doctor/);
+  assert.match(result.stdout, /ProjectMedic/);
   assert.match(result.stdout, /checks completed/);
 });
 
