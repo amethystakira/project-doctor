@@ -10,7 +10,7 @@
     ".": "./src/index.js"
   },
   "bin": {
-    "project-doctor": "bin/doctor.js"
+    "projectmedic": "bin/doctor.js"
   },
   "files": [
     "src/",
