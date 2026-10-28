@@ -14,31 +14,49 @@ A Node.js project health checker that identifies missing or misconfigured projec
 
 ## Requirements
 
-- Node.js
+- Node.js 22 or later
 
-## Usage
+## Installation and Usage
 
-Run the checker against the current directory:
+### Run without installing
+
+Check the current directory:
 
 ```bash
-node bin/doctor.js .
+npx projectmedic .
 ```
 
 Check another project:
 
 ```bash
-node bin/doctor.js /path/to/project
+npx projectmedic /path/to/project
 ```
 
 Output a JSON report:
 
 ```bash
-node bin/doctor.js . --json
+npx projectmedic . --json
+```
+
+### Install as a development dependency
+
+To use ProjectMedic in a project, install it with npm:
+
+```bash
+npm install --save-dev projectmedic
+```
+
+Then run the CLI using:
+
+```bash
+npx projectmedic .
 ```
 
 ## Library API
 
-```js
+ProjectMedic can also be imported into JavaScript code.
+
+```javascript
 import { inspectProject } from "projectmedic";
 
 const report = await inspectProject("./my-project");
@@ -51,10 +69,24 @@ The report contains the project path, a summary of check results, and individual
 
 ## Development
 
+Clone the repository:
+
+```bash
+git clone https://github.com/amethystakira/project-doctor.git
+cd project-doctor
+npm install
+```
+
 Run the test suite:
 
 ```bash
 npm test
+```
+
+To run the CLI directly from the source code during development:
+
+```bash
+node bin/doctor.js .
 ```
 
 ## License
