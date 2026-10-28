@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 import { inspectProject } from "../src/index.js";
 
 const args = process.argv.slice(2);
