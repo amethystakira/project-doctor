@@ -72,8 +72,8 @@ The report contains the project path, a summary of check results, and individual
 Clone the repository:
 
 ```bash
-git clone https://github.com/amethystakira/project-doctor.git
-cd project-doctor
+git clone https://github.com/amethystakira/projectmedic.git
+cd projectmedic
 npm install
 ```
 
